@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hollywood Movies</title>
+    <style>
+        #a {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        .movie {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .movie-item {
+            width: 200px;
+            text-align: center;
+        }
+        .movie-poster {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Hollywood Movies</h1>
+<input type="text" id="a" onkeyup="searchMovies()" placeholder="Search">
+
+<div id="b" class="movie"></div>
+
+<script>
+    const movies = [
+        { title: "Lion King",rating: 8.5, poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6Vwl8229bhDESeFi5PFx_SM8YxB__IxdDp2cnienNz29YFpGbFVq6S-mamX6mhP3ybJuFLA" },
+        { title: "Cindrella",rating: 7.9, poster: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQFsjj2kJpPkKF9fUEkxwqZKdNIp3swlXzFdOZ_tqDLGGLCO9Ujo9o7W8DdqP9UHEJFONutSw" },
+        // Add more movie objects as needed
+    ];
+
+    function displayMovies() {
+        const movieList = document.getElementById("b");
+        movieList.innerHTML = "";
+        movies.forEach(movie => {
+            const movieItem = document.createElement("div");
+            movieItem.classList.add("movie-item");
+
+            const poster = document.createElement("img");
+            poster.src = movie.poster;
+            poster.alt = movie.title + " Poster";
+            poster.classList.add("movie-poster");
+            movieItem.appendChild(poster);
+
+            const title = document.createElement("h2");
+            title.textContent = movie.title;
+            movieItem.appendChild(title);
+
+            const rating = document.createElement("p");
+            rating.textContent = "Rating: " + movie.rating;
+            movieItem.appendChild(rating);
+
+            movieList.appendChild(movieItem);
+        });
+    }
+
+    function searchMovies() {
+        const input = document.getElementById("a").value.toLowerCase();
+        const filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(input));
+        displayMovies(filteredMovies);
+    }
+
+    // Initial display of all movies
+    displayMovies();
+</script>
+</body>
+</html>
+
